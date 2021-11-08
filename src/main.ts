@@ -7,12 +7,14 @@ setInterval(async () => {
 
     // 자정에 실행
     if (now.getHours() === 0 && now.getMinutes() === 0) {
-        await BurnPoolContract.burn();
-
-        // 월요일
-        if (now.getDate() === 1) {
+        try {
+            await BurnPoolContract.burn();
+        } catch (e) { console.error(e); }
+        try {
             await KlayMIXPoolContract.forward();
+        } catch (e) { console.error(e); }
+        try {
             await KSPMIXPoolContract.forward();
-        }
+        } catch (e) { console.error(e); }
     }
 }, 60000);

@@ -9,10 +9,23 @@ const KSPMIXPoolContract_1 = __importDefault(require("./contracts/KSPMIXPoolCont
 setInterval(async () => {
     const now = new Date();
     if (now.getHours() === 0 && now.getMinutes() === 0) {
-        await BurnPoolContract_1.default.burn();
-        if (now.getDate() === 1) {
+        try {
+            await BurnPoolContract_1.default.burn();
+        }
+        catch (e) {
+            console.error(e);
+        }
+        try {
             await KlayMIXPoolContract_1.default.forward();
+        }
+        catch (e) {
+            console.error(e);
+        }
+        try {
             await KSPMIXPoolContract_1.default.forward();
+        }
+        catch (e) {
+            console.error(e);
         }
     }
 }, 60000);

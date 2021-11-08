@@ -3,7 +3,13 @@ import "dotenv/config";
 
 class Klaytn {
 
-    public caver = new Caver("https://api.dogesound.club:9013/");
+    private caver = new Caver(new Caver.providers.HttpProvider("https://node-api.klaytnapi.com/v1/klaytn", {
+        headers: [
+            { name: "Authorization", value: "Basic S0FTSzgxOFc1RlBaNFA4NlpTVVg0Uk9UOkNXYkw5RWh0OHJEV29qZmZlWDdBVXk5cjRqZjQwR1NqMFBWaEpRam0=" },
+            { name: "x-chain-id", value: "8217" },
+        ],
+    }));
+
     public walletAddress = process.env.PUBLIC_KEY;
 
     constructor() {
