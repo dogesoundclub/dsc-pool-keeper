@@ -1,7 +1,7 @@
 import "dotenv/config";
 declare class Klaytn {
     private caver;
-    walletAddress: string | undefined;
+    walletAddress: any;
     constructor();
     createContract(address: string, abi: any): any;
 }
